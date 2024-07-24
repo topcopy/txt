@@ -1,0 +1,1301 @@
+FUNCTION_BLOCK FB 18
+TITLE =
+VERSION : 0.1
+
+
+VAR_INPUT
+  IN0 : BOOL ;	
+  IN1 : REAL ;	
+  IN2 : WORD ;	
+  IN3 : BOOL ;	
+  IN4 : DINT ;	
+  IN5 : BOOL ;	
+  IN6 : BOOL ;	
+  IN7 : BOOL ;	
+  IN8 : BOOL ;	
+  IN9 : BOOL ;	
+  IN10 : INT ;	
+  IN11 : BOOL ;	
+END_VAR
+VAR_OUTPUT
+  OUT12 : WORD ;	
+  OUT13 : BOOL ;	
+  OUT14 : BOOL ;	
+END_VAR
+VAR
+  STAT15 : INT ;	
+  STAT16 : DINT ;	
+  STAT17 : DINT ;	
+  STAT18 : DINT ;	
+  STAT19 : BOOL ;	
+  STAT20 : BOOL ;	
+  STAT21 : DINT ;	
+  STAT22 : BOOL ;	
+  STAT23 : BOOL ;	
+  STAT24 : DINT ;	
+  STAT25 : DINT ;	
+  STAT26 : DINT ;	
+  STAT27 : DINT ;	
+  STAT28 : DINT ;	
+  STAT29 : INT ;	
+  STAT30 : REAL ;	
+  STAT31 : DINT ;	
+  STAT32 : SFB 4;	
+  STAT40 : BOOL ;	
+  STAT41 : SFB 4;	
+END_VAR
+VAR_TEMP
+  TEMP49 : WORD ;	
+  TEMP50 : BOOL ;	
+END_VAR
+BEGIN
+NETWORK
+TITLE =
+
+      A(    ; 
+      O(    ; 
+      A     #IN5; 
+      AN    #IN3; 
+      JNB   _001; 
+      L     #IN2; 
+      T     #STAT15; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_001: A     BR; 
+      )     ; 
+      O(    ; 
+      A(    ; 
+      ON    #IN5; 
+      O     #IN3; 
+      )     ; 
+      JNB   _002; 
+      L     #IN10; 
+      T     #STAT15; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_002: A     BR; 
+      )     ; 
+      )     ; 
+      JNB   _003; 
+      L     #STAT15; 
+      T     #STAT16; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_003: A     BR; 
+      =     L      3.0; 
+      A(    ; 
+      A     L      3.0; 
+      AN    #IN11; 
+      JNB   _004; 
+      L     #STAT16; 
+      L     L#40; 
+      *D    ; 
+      T     #STAT17; 
+      AN    OV; 
+      SAVE  ; 
+      CLR   ; 
+_004: A     BR; 
+      )     ; 
+      JNB   _005; 
+      L     #STAT17; 
+      L     L#100; 
+      /D    ; 
+      T     #STAT18; 
+_005: NOP   0; 
+      A(    ; 
+      A     L      3.0; 
+      A     #IN11; 
+      JNB   _006; 
+      L     #STAT16; 
+      L     L#46; 
+      *D    ; 
+      T     #STAT17; 
+      AN    OV; 
+      SAVE  ; 
+      CLR   ; 
+_006: A     BR; 
+      )     ; 
+      JNB   _007; 
+      L     #STAT17; 
+      L     L#100; 
+      /D    ; 
+      T     #STAT18; 
+_007: NOP   0; 
+NETWORK
+TITLE =
+
+      A     #IN7; 
+      A     #IN0; 
+      FP    #STAT19; 
+      A     #IN5; 
+      AN    #STAT22; 
+      JNB   _008; 
+      L     #STAT21; 
+      L     #IN4; 
+      +D    ; 
+      T     #STAT21; 
+_008: NOP   0; 
+NETWORK
+TITLE =
+
+      L     #STAT21; 
+      L     L#106; 
+      >D    ; 
+      =     #STAT22; 
+NETWORK
+TITLE =
+
+      A     #IN8; 
+      AN    #IN7; 
+      A     #IN0; 
+      FP    #STAT20; 
+      A     #IN5; 
+      AN    #STAT23; 
+      JNB   _009; 
+      L     #STAT21; 
+      L     #IN4; 
+      -D    ; 
+      T     #STAT21; 
+_009: NOP   0; 
+NETWORK
+TITLE =
+
+      L     L#101; 
+      L     #STAT21; 
+      >D    ; 
+      =     #STAT23; 
+NETWORK
+TITLE =
+
+      A     #IN5; 
+      =     L      3.0; 
+      BLD   103; 
+      CALL #STAT32 (
+           IN                       := L      3.0,
+           PT                       := T#3S,
+           Q                        := #STAT40);
+
+      NOP   0; 
+NETWORK
+TITLE =
+
+      A(    ; 
+      A     #IN5; 
+      AN    #STAT40; 
+      ON    #IN5; 
+      )     ; 
+      JNB   _00a; 
+      L     100; 
+      T     #STAT21; 
+_00a: NOP   0; 
+NETWORK
+TITLE =
+
+      A(    ; 
+      L     #STAT18; 
+      L     #STAT21; 
+      *D    ; 
+      T     #STAT24; 
+      AN    OV; 
+      SAVE  ; 
+      CLR   ; 
+      A     BR; 
+      )     ; 
+      JNB   _00b; 
+      L     #STAT24; 
+      L     L#100; 
+      /D    ; 
+      T     #STAT25; 
+_00b: NOP   0; 
+NETWORK
+TITLE =
+
+      L     #IN1; 
+      RND   ; 
+      T     #STAT26; 
+      NOP   0; 
+NETWORK
+TITLE =
+
+      A(    ; 
+      A(    ; 
+      L     #STAT25; 
+      L     #STAT26; 
+      *D    ; 
+      T     #STAT27; 
+      AN    OV; 
+      SAVE  ; 
+      CLR   ; 
+      A     BR; 
+      )     ; 
+      JNB   _00c; 
+      L     #STAT27; 
+      L     L#100; 
+      /D    ; 
+      T     #STAT28; 
+      AN    OV; 
+      SAVE  ; 
+      CLR   ; 
+_00c: A     BR; 
+      )     ; 
+      JNB   _00d; 
+      L     #STAT28; 
+      T     #STAT29; 
+_00d: NOP   0; 
+NETWORK
+TITLE =
+
+      AN    #TEMP50; 
+      A     #TEMP50; 
+      =     L      3.0; 
+      BLD   103; 
+      CALL FC   105 (
+           IN0                      := #STAT29,
+           IN1                      := 2.764800e+004,
+           IN2                      := 0.000000e+000,
+           IN3                      := L      3.0,
+           RET_VAL                  := #TEMP49,
+           OUT4                     := #STAT30);
+      NOP   0; 
+NETWORK
+TITLE =
+
+      A(    ; 
+      L     #STAT30; 
+      RND   ; 
+      T     #STAT31; 
+      AN    OV; 
+      SAVE  ; 
+      CLR   ; 
+      A     BR; 
+      )     ; 
+      JNB   _00e; 
+      L     #STAT31; 
+      T     #OUT12; 
+_00e: NOP   0; 
+NETWORK
+TITLE =
+
+      A     #IN6; 
+      =     #OUT13; 
+NETWORK
+TITLE =
+
+      A(    ; 
+      ON    #IN6; 
+      O     #IN9; 
+      )     ; 
+      JNB   _00f; 
+      L     0; 
+      T     #OUT12; 
+_00f: NOP   0; 
+NETWORK
+TITLE =
+
+      A     #IN6; 
+      =     L      3.0; 
+      BLD   103; 
+      CALL #STAT41 (
+           IN                       := L      3.0,
+           PT                       := T#300MS,
+           Q                        := #OUT14);
+
+      NOP   0; 
+END_FUNCTION_BLOCK
+
+FUNCTION_BLOCK FB 20
+TITLE =
+VERSION : 0.1
+
+
+VAR
+  STAT0 : FB 17;	
+  STAT67 : FB 18;	
+  STAT117 : FB 18;	
+  STAT167 : FB 18;	
+  STAT217 : FB 18;	
+  STAT267 : FB 18;	
+  STAT317 : FB 18;	
+  STAT367 : FB 18;	
+  STAT417 : BOOL ;	
+  STAT418 : BOOL ;	
+  STAT419 : BOOL ;	
+  STAT420 : BOOL ;	
+  STAT421 : BOOL ;	
+  STAT422 : BOOL ;	
+  STAT423 : BOOL ;	
+  STAT424 : BOOL ;	
+END_VAR
+VAR_TEMP
+  TEMP425 : BOOL ;	
+  TEMP426 : BOOL ;	
+  TEMP427 : BOOL ;	
+  TEMP428 : BOOL ;	
+  TEMP429 : BOOL ;	
+  TEMP430 : BOOL ;	
+  TEMP431 : BOOL ;	
+  TEMP432 : BOOL ;	
+  TEMP433 : BOOL ;	
+  TEMP434 : BOOL ;	
+  TEMP435 : BOOL ;	
+  TEMP436 : BOOL ;	
+  TEMP437 : BOOL ;	
+  TEMP438 : BOOL ;	
+  TEMP439 : BOOL ;	
+  TEMP440 : BOOL ;	
+  TEMP441 : BOOL ;	
+  TEMP442 : BOOL ;	
+END_VAR
+BEGIN
+NETWORK
+TITLE =
+
+      A     I      2.0; 
+      AN    I      0.2; 
+      AN    M      1.2; 
+      =     M      1.0; 
+NETWORK
+TITLE =
+
+      ON    I      2.0; 
+      O     I      0.2; 
+      O     M      1.2; 
+      =     M      1.1; 
+NETWORK
+TITLE =
+
+      A(    ; 
+      A(    ; 
+      L     PIW    7; 
+      T     MW    80; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+      A     BR; 
+      )     ; 
+      JNB   _001; 
+      L     MW    80; 
+      L     100; 
+      /I    ; 
+      T     MW    82; 
+      AN    OV; 
+      SAVE  ; 
+      CLR   ; 
+_001: A     BR; 
+      )     ; 
+      JNB   _002; 
+      L     MW    82; 
+      L     110; 
+      *I    ; 
+      T     MW   100; 
+      AN    OV; 
+      SAVE  ; 
+      CLR   ; 
+_002: A     BR; 
+      =     L      3.0; 
+      A     L      3.0; 
+      A(    ; 
+      L     MW   100; 
+      L     50; 
+      <=I   ; 
+      )     ; 
+      =     L      3.1; 
+      A     L      3.1; 
+      JNB   _003; 
+      L     0; 
+      T     MW   102; 
+_003: NOP   0; 
+      A     L      3.1; 
+      BLD   102; 
+      =     M      1.2; 
+      A     L      3.0; 
+      A(    ; 
+      L     MW   100; 
+      L     27648; 
+      >I    ; 
+      )     ; 
+      JNB   _004; 
+      L     27648; 
+      T     MW   102; 
+_004: NOP   0; 
+      A     L      3.0; 
+      A(    ; 
+      L     MW   100; 
+      L     0; 
+      >I    ; 
+      )     ; 
+      A(    ; 
+      L     MW   100; 
+      L     27648; 
+      <=I   ; 
+      )     ; 
+      JNB   _005; 
+      L     MW   100; 
+      T     MW   102; 
+_005: NOP   0; 
+NETWORK
+TITLE =
+
+      A     I      1.3; 
+      =     L      3.0; 
+      BLD   103; 
+      A     I      1.5; 
+      =     L      3.1; 
+      BLD   103; 
+      A     M      1.1; 
+      =     L      3.2; 
+      BLD   103; 
+      A     I      1.1; 
+      =     L      3.3; 
+      BLD   103; 
+      A     I      1.5; 
+      =     L      3.4; 
+      BLD   103; 
+      CALL #STAT0 (
+           IN0                      := L      3.0,
+           IN1                      := L      3.1,
+           IN2                      := L      3.2,
+           IN3                      := L      3.3,
+           IN4                      := L      3.4,
+           OUT5                     := M     20.0,
+           OUT6                     := M     20.1,
+           OUT7                     := M     20.2,
+           OUT8                     := M     20.3,
+           OUT9                     := M     20.4);
+      NOP   0; 
+NETWORK
+TITLE =
+
+      A     I      0.0; 
+      =     L      3.0; 
+      BLD   103; 
+      A(    ; 
+      O     I      0.6; 
+      O     I      0.7; 
+      )     ; 
+      NOT   ; 
+      =     L      3.1; 
+      BLD   103; 
+      AN    I      0.6; 
+      =     L      3.2; 
+      BLD   103; 
+      CALL FB     1 , DB    51 (
+           IN0                      := L      3.0,
+           IN1                      := L      3.1,
+           IN2                      := L      3.2,
+           OUT3                     := M     11.0,
+           OUT4                     := Q      0.0);
+
+      NOP   0; 
+NETWORK
+TITLE =
+
+      A     M     30.0; 
+      =     L      3.0; 
+      A(    ; 
+      A(    ; 
+      A(    ; 
+      A     L      3.0; 
+      JNB   _006; 
+      L     DB30.DBD    0; 
+      T     DB20.DBD  142; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_006: A     BR; 
+      )     ; 
+      JNB   _007; 
+      L     DB30.DBD    4; 
+      T     DB20.DBD  264; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_007: A     BR; 
+      )     ; 
+      JNB   _008; 
+      L     DB30.DBD    8; 
+      T     DB20.DBD  386; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_008: A     BR; 
+      )     ; 
+      JNB   _009; 
+      L     DB30.DBD   12; 
+      T     DB20.DBD  508; 
+_009: NOP   0; 
+      A(    ; 
+      A(    ; 
+      A     L      3.0; 
+      JNB   _00a; 
+      L     DB30.DBD   16; 
+      T     DB20.DBD  630; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_00a: A     BR; 
+      )     ; 
+      JNB   _00b; 
+      L     DB30.DBD   20; 
+      T     DB20.DBD  752; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_00b: A     BR; 
+      )     ; 
+      JNB   _00c; 
+      L     DB30.DBD   24; 
+      T     DB20.DBD  874; 
+_00c: NOP   0; 
+NETWORK
+TITLE =
+
+      A     M     30.1; 
+      =     L      3.0; 
+      A(    ; 
+      A(    ; 
+      A(    ; 
+      A     L      3.0; 
+      JNB   _00d; 
+      L     DB31.DBD    0; 
+      T     DB20.DBD  142; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_00d: A     BR; 
+      )     ; 
+      JNB   _00e; 
+      L     DB31.DBD    4; 
+      T     DB20.DBD  264; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_00e: A     BR; 
+      )     ; 
+      JNB   _00f; 
+      L     DB31.DBD    8; 
+      T     DB20.DBD  386; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_00f: A     BR; 
+      )     ; 
+      JNB   _010; 
+      L     DB31.DBD   12; 
+      T     DB20.DBD  508; 
+_010: NOP   0; 
+      A(    ; 
+      A(    ; 
+      A     L      3.0; 
+      JNB   _011; 
+      L     DB31.DBD   16; 
+      T     DB20.DBD  630; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_011: A     BR; 
+      )     ; 
+      JNB   _012; 
+      L     DB31.DBD   20; 
+      T     DB20.DBD  752; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_012: A     BR; 
+      )     ; 
+      JNB   _013; 
+      L     DB31.DBD   24; 
+      T     DB20.DBD  874; 
+_013: NOP   0; 
+NETWORK
+TITLE =
+
+      A     M     30.2; 
+      =     L      3.0; 
+      A(    ; 
+      A(    ; 
+      A(    ; 
+      A     L      3.0; 
+      JNB   _014; 
+      L     DB32.DBD    0; 
+      T     DB20.DBD  142; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_014: A     BR; 
+      )     ; 
+      JNB   _015; 
+      L     DB32.DBD    4; 
+      T     DB20.DBD  264; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_015: A     BR; 
+      )     ; 
+      JNB   _016; 
+      L     DB32.DBD    8; 
+      T     DB20.DBD  386; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_016: A     BR; 
+      )     ; 
+      JNB   _017; 
+      L     DB32.DBD   12; 
+      T     DB20.DBD  508; 
+_017: NOP   0; 
+      A(    ; 
+      A(    ; 
+      A     L      3.0; 
+      JNB   _018; 
+      L     DB32.DBD   16; 
+      T     DB20.DBD  630; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_018: A     BR; 
+      )     ; 
+      JNB   _019; 
+      L     DB32.DBD   20; 
+      T     DB20.DBD  752; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_019: A     BR; 
+      )     ; 
+      JNB   _01a; 
+      L     DB32.DBD   24; 
+      T     DB20.DBD  874; 
+_01a: NOP   0; 
+NETWORK
+TITLE =
+
+      A     M     30.3; 
+      =     L      3.0; 
+      A(    ; 
+      A(    ; 
+      A(    ; 
+      A     L      3.0; 
+      JNB   _01b; 
+      L     DB33.DBD    0; 
+      T     DB20.DBD  142; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_01b: A     BR; 
+      )     ; 
+      JNB   _01c; 
+      L     DB33.DBD    4; 
+      T     DB20.DBD  264; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_01c: A     BR; 
+      )     ; 
+      JNB   _01d; 
+      L     DB33.DBD    8; 
+      T     DB20.DBD  386; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_01d: A     BR; 
+      )     ; 
+      JNB   _01e; 
+      L     DB33.DBD   12; 
+      T     DB20.DBD  508; 
+_01e: NOP   0; 
+      A(    ; 
+      A(    ; 
+      A     L      3.0; 
+      JNB   _01f; 
+      L     DB33.DBD   16; 
+      T     DB20.DBD  630; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_01f: A     BR; 
+      )     ; 
+      JNB   _020; 
+      L     DB33.DBD   20; 
+      T     DB20.DBD  752; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_020: A     BR; 
+      )     ; 
+      JNB   _021; 
+      L     DB33.DBD   24; 
+      T     DB20.DBD  874; 
+_021: NOP   0; 
+NETWORK
+TITLE =
+
+      A     M     30.4; 
+      =     L      3.0; 
+      A(    ; 
+      A(    ; 
+      A(    ; 
+      A     L      3.0; 
+      JNB   _022; 
+      L     DB34.DBD    0; 
+      T     DB20.DBD  142; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_022: A     BR; 
+      )     ; 
+      JNB   _023; 
+      L     DB34.DBD    4; 
+      T     DB20.DBD  264; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_023: A     BR; 
+      )     ; 
+      JNB   _024; 
+      L     DB34.DBD    8; 
+      T     DB20.DBD  386; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_024: A     BR; 
+      )     ; 
+      JNB   _025; 
+      L     DB34.DBD   12; 
+      T     DB20.DBD  508; 
+_025: NOP   0; 
+      A(    ; 
+      A(    ; 
+      A     L      3.0; 
+      JNB   _026; 
+      L     DB34.DBD   16; 
+      T     DB20.DBD  630; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_026: A     BR; 
+      )     ; 
+      JNB   _027; 
+      L     DB34.DBD   20; 
+      T     DB20.DBD  752; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_027: A     BR; 
+      )     ; 
+      JNB   _028; 
+      L     DB34.DBD   24; 
+      T     DB20.DBD  874; 
+_028: NOP   0; 
+NETWORK
+TITLE =
+
+      A     M     30.5; 
+      =     L      3.0; 
+      A(    ; 
+      A(    ; 
+      A(    ; 
+      A     L      3.0; 
+      JNB   _029; 
+      L     DB35.DBD    0; 
+      T     DB20.DBD  142; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_029: A     BR; 
+      )     ; 
+      JNB   _02a; 
+      L     DB35.DBD    4; 
+      T     DB20.DBD  264; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_02a: A     BR; 
+      )     ; 
+      JNB   _02b; 
+      L     DB35.DBD    8; 
+      T     DB20.DBD  386; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_02b: A     BR; 
+      )     ; 
+      JNB   _02c; 
+      L     DB35.DBD   12; 
+      T     DB20.DBD  508; 
+_02c: NOP   0; 
+      A(    ; 
+      A(    ; 
+      A     L      3.0; 
+      JNB   _02d; 
+      L     DB35.DBD   16; 
+      T     DB20.DBD  630; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_02d: A     BR; 
+      )     ; 
+      JNB   _02e; 
+      L     DB35.DBD   20; 
+      T     DB20.DBD  752; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_02e: A     BR; 
+      )     ; 
+      JNB   _02f; 
+      L     DB35.DBD   24; 
+      T     DB20.DBD  874; 
+_02f: NOP   0; 
+NETWORK
+TITLE =
+
+      A     M     30.6; 
+      =     L      3.0; 
+      A(    ; 
+      A(    ; 
+      A(    ; 
+      A     L      3.0; 
+      JNB   _030; 
+      L     DB36.DBD    0; 
+      T     DB20.DBD  142; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_030: A     BR; 
+      )     ; 
+      JNB   _031; 
+      L     DB36.DBD    4; 
+      T     DB20.DBD  264; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_031: A     BR; 
+      )     ; 
+      JNB   _032; 
+      L     DB36.DBD    8; 
+      T     DB20.DBD  386; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_032: A     BR; 
+      )     ; 
+      JNB   _033; 
+      L     DB36.DBD   12; 
+      T     DB20.DBD  508; 
+_033: NOP   0; 
+      A(    ; 
+      A(    ; 
+      A     L      3.0; 
+      JNB   _034; 
+      L     DB36.DBD   16; 
+      T     DB20.DBD  630; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_034: A     BR; 
+      )     ; 
+      JNB   _035; 
+      L     DB36.DBD   20; 
+      T     DB20.DBD  752; 
+      SET   ; 
+      SAVE  ; 
+      CLR   ; 
+_035: A     BR; 
+      )     ; 
+      JNB   _036; 
+      L     DB36.DBD   24; 
+      T     DB20.DBD  874; 
+_036: NOP   0; 
+NETWORK
+TITLE =
+
+      A     #STAT417; 
+      =     L      3.0; 
+      BLD   103; 
+      A(    ; 
+      A     M      0.5; 
+      =     L      3.1; 
+      BLD   103; 
+      A     M      1.1; 
+      =     L      3.2; 
+      BLD   103; 
+      A     M      1.0; 
+      =     L      3.3; 
+      BLD   103; 
+      A     M     11.0; 
+      =     L      3.4; 
+      BLD   103; 
+      A     M     20.4; 
+      =     L      3.7; 
+      BLD   103; 
+      CALL #STAT67 (
+           IN0                      := L      3.1,
+           IN1                      := DB20.DBD  142,
+           IN2                      := MW   102,
+           IN3                      := L      3.2,
+           IN4                      := L#1,
+           IN5                      := L      3.3,
+           IN6                      := L      3.4,
+           IN9                      := L      3.7,
+           IN10                     := 7500,
+           OUT12                    := PQW    7,
+           OUT13                    := Q      1.0,
+           OUT14                    := #TEMP425);
+      A     BR; 
+      )     ; 
+      JNB   _037; 
+      CALL FC   105 (
+           IN0                      := QW     7,
+           IN1                      := 8.000000e+001,
+           IN2                      := 0.000000e+000,
+           IN3                      := L      3.0,
+           RET_VAL                  := MW    50,
+           OUT4                     := DB40.DBD    0);
+_037: NOP   0; 
+NETWORK
+TITLE =
+
+      A     #STAT418; 
+      =     L      3.0; 
+      BLD   103; 
+      A(    ; 
+      A     M      0.5; 
+      =     L      3.1; 
+      BLD   103; 
+      A     M      1.1; 
+      =     L      3.2; 
+      BLD   103; 
+      A     M      1.0; 
+      =     L      3.3; 
+      BLD   103; 
+      A     #TEMP425; 
+      =     L      3.4; 
+      BLD   103; 
+      A     M     20.0; 
+      =     L      3.5; 
+      BLD   103; 
+      A     M     20.1; 
+      =     L      3.6; 
+      BLD   103; 
+      A(    ; 
+      O     M     20.3; 
+      O     M     20.4; 
+      )     ; 
+      =     L      3.7; 
+      BLD   103; 
+      A     M     20.2; 
+      =     L      4.0; 
+      BLD   103; 
+      CALL #STAT117 (
+           IN0                      := L      3.1,
+           IN1                      := DB20.DBD  264,
+           IN2                      := MW   102,
+           IN3                      := L      3.2,
+           IN4                      := L#1,
+           IN5                      := L      3.3,
+           IN6                      := L      3.4,
+           IN7                      := L      3.5,
+           IN8                      := L      3.6,
+           IN9                      := L      3.7,
+           IN10                     := 11000,
+           IN11                     := L      4.0,
+           OUT12                    := PQW    9,
+           OUT13                    := Q      1.1,
+           OUT14                    := #TEMP426);
+      A     BR; 
+      )     ; 
+      JNB   _038; 
+      CALL FC   105 (
+           IN0                      := QW     9,
+           IN1                      := 8.000000e+001,
+           IN2                      := 0.000000e+000,
+           IN3                      := L      3.0,
+           RET_VAL                  := MW    52,
+           OUT4                     := DB40.DBD    4);
+_038: NOP   0; 
+NETWORK
+TITLE =
+
+      A     #STAT419; 
+      =     L      3.0; 
+      BLD   103; 
+      A(    ; 
+      A     M      0.5; 
+      =     L      3.1; 
+      BLD   103; 
+      A     M      1.1; 
+      =     L      3.2; 
+      BLD   103; 
+      A     M      1.0; 
+      =     L      3.3; 
+      BLD   103; 
+      A     #TEMP426; 
+      =     L      3.4; 
+      BLD   103; 
+      A     M     20.0; 
+      =     L      3.5; 
+      BLD   103; 
+      A     M     20.1; 
+      =     L      3.6; 
+      BLD   103; 
+      A(    ; 
+      O     M     20.3; 
+      O     M     20.4; 
+      )     ; 
+      =     L      3.7; 
+      BLD   103; 
+      A     M     20.2; 
+      =     L      4.0; 
+      BLD   103; 
+      CALL #STAT167 (
+           IN0                      := L      3.1,
+           IN1                      := DB20.DBD  386,
+           IN2                      := MW   102,
+           IN3                      := L      3.2,
+           IN4                      := L#1,
+           IN5                      := L      3.3,
+           IN6                      := L      3.4,
+           IN7                      := L      3.5,
+           IN8                      := L      3.6,
+           IN9                      := L      3.7,
+           IN10                     := 12500,
+           IN11                     := L      4.0,
+           OUT12                    := PQW   11,
+           OUT13                    := Q      1.2,
+           OUT14                    := #TEMP427);
+      A     BR; 
+      )     ; 
+      JNB   _039; 
+      CALL FC   105 (
+           IN0                      := QW    11,
+           IN1                      := 8.000000e+001,
+           IN2                      := 0.000000e+000,
+           IN3                      := L      3.0,
+           RET_VAL                  := MW    54,
+           OUT4                     := DB40.DBD    8);
+_039: NOP   0; 
+NETWORK
+TITLE =
+
+      A     #STAT420; 
+      =     L      3.0; 
+      BLD   103; 
+      A(    ; 
+      A     M      0.5; 
+      =     L      3.1; 
+      BLD   103; 
+      A     M      1.1; 
+      =     L      3.2; 
+      BLD   103; 
+      A     M      1.0; 
+      =     L      3.3; 
+      BLD   103; 
+      A     #TEMP427; 
+      =     L      3.4; 
+      BLD   103; 
+      A     M     20.0; 
+      =     L      3.5; 
+      BLD   103; 
+      A     M     20.1; 
+      =     L      3.6; 
+      BLD   103; 
+      A(    ; 
+      O     M     20.4; 
+      O     M     20.3; 
+      )     ; 
+      =     L      3.7; 
+      BLD   103; 
+      A     M     20.2; 
+      =     L      4.0; 
+      BLD   103; 
+      CALL #STAT217 (
+           IN0                      := L      3.1,
+           IN1                      := DB20.DBD  508,
+           IN2                      := MW   102,
+           IN3                      := L      3.2,
+           IN4                      := L#1,
+           IN5                      := L      3.3,
+           IN6                      := L      3.4,
+           IN7                      := L      3.5,
+           IN8                      := L      3.6,
+           IN9                      := L      3.7,
+           IN10                     := 12500,
+           IN11                     := L      4.0,
+           OUT12                    := PQW   13,
+           OUT13                    := Q      1.3,
+           OUT14                    := #TEMP428);
+      A     BR; 
+      )     ; 
+      JNB   _03a; 
+      CALL FC   105 (
+           IN0                      := QW    13,
+           IN1                      := 8.000000e+001,
+           IN2                      := 0.000000e+000,
+           IN3                      := L      3.0,
+           RET_VAL                  := MW    56,
+           OUT4                     := DB40.DBD   12);
+_03a: NOP   0; 
+NETWORK
+TITLE =
+
+      A     #STAT421; 
+      =     L      3.0; 
+      BLD   103; 
+      A(    ; 
+      A     M      0.5; 
+      =     L      3.1; 
+      BLD   103; 
+      A     M      1.1; 
+      =     L      3.2; 
+      BLD   103; 
+      A     M      1.0; 
+      =     L      3.3; 
+      BLD   103; 
+      A     #TEMP428; 
+      =     L      3.4; 
+      BLD   103; 
+      A     M     20.0; 
+      =     L      3.5; 
+      BLD   103; 
+      A     M     20.4; 
+      =     L      3.7; 
+      BLD   103; 
+      A     M     20.2; 
+      =     L      4.0; 
+      BLD   103; 
+      CALL #STAT267 (
+           IN0                      := L      3.1,
+           IN1                      := DB20.DBD  630,
+           IN2                      := MW   102,
+           IN3                      := L      3.2,
+           IN4                      := L#1,
+           IN5                      := L      3.3,
+           IN6                      := L      3.4,
+           IN7                      := L      3.5,
+           IN9                      := L      3.7,
+           IN10                     := 11000,
+           IN11                     := L      4.0,
+           OUT12                    := PQW   15,
+           OUT13                    := Q      1.4,
+           OUT14                    := #TEMP429);
+      A     BR; 
+      )     ; 
+      JNB   _03b; 
+      CALL FC   105 (
+           IN0                      := QW    15,
+           IN1                      := 8.000000e+001,
+           IN2                      := 0.000000e+000,
+           IN3                      := L      3.0,
+           RET_VAL                  := MW    58,
+           OUT4                     := DB40.DBD   16);
+_03b: NOP   0; 
+NETWORK
+TITLE =
+
+      A     #STAT422; 
+      =     L      3.0; 
+      BLD   103; 
+      A(    ; 
+      A     M      0.5; 
+      =     L      3.1; 
+      BLD   103; 
+      A     M      1.1; 
+      =     L      3.2; 
+      BLD   103; 
+      A     M      1.0; 
+      =     L      3.3; 
+      BLD   103; 
+      A     #TEMP429; 
+      =     L      3.4; 
+      BLD   103; 
+      A     M     20.4; 
+      =     L      3.7; 
+      BLD   103; 
+      A     M     20.2; 
+      =     L      4.0; 
+      BLD   103; 
+      CALL #STAT317 (
+           IN0                      := L      3.1,
+           IN1                      := DB20.DBD  752,
+           IN2                      := MW   102,
+           IN3                      := L      3.2,
+           IN4                      := L#1,
+           IN5                      := L      3.3,
+           IN6                      := L      3.4,
+           IN9                      := L      3.7,
+           IN10                     := 11000,
+           IN11                     := L      4.0,
+           OUT12                    := PQW   17,
+           OUT13                    := Q      1.5,
+           OUT14                    := #TEMP430);
+      A     BR; 
+      )     ; 
+      JNB   _03c; 
+      CALL FC   105 (
+           IN0                      := QW    17,
+           IN1                      := 8.000000e+001,
+           IN2                      := 0.000000e+000,
+           IN3                      := L      3.0,
+           RET_VAL                  := MW    60,
+           OUT4                     := DB40.DBD   20);
+_03c: NOP   0; 
+NETWORK
+TITLE =
+
+      A     #STAT423; 
+      =     L      3.0; 
+      BLD   103; 
+      A(    ; 
+      A     M      0.5; 
+      =     L      3.1; 
+      BLD   103; 
+      A     M      1.1; 
+      =     L      3.2; 
+      BLD   103; 
+      A     M      1.0; 
+      =     L      3.3; 
+      BLD   103; 
+      A     #TEMP430; 
+      =     L      3.4; 
+      BLD   103; 
+      AN    I      0.2; 
+      A     M     20.4; 
+      =     L      3.7; 
+      BLD   103; 
+      A     M     20.2; 
+      =     L      4.0; 
+      BLD   103; 
+      CALL #STAT367 (
+           IN0                      := L      3.1,
+           IN1                      := DB20.DBD  874,
+           IN2                      := MW   102,
+           IN3                      := L      3.2,
+           IN4                      := L#1,
+           IN5                      := L      3.3,
+           IN6                      := L      3.4,
+           IN9                      := L      3.7,
+           IN10                     := 11000,
+           IN11                     := L      4.0,
+           OUT12                    := PQW   19,
+           OUT13                    := Q      1.6,
+           OUT14                    := #TEMP431);
+      A     BR; 
+      )     ; 
+      JNB   _03d; 
+      CALL FC   105 (
+           IN0                      := QW    19,
+           IN1                      := 8.000000e+001,
+           IN2                      := 0.000000e+000,
+           IN3                      := L      3.0,
+           RET_VAL                  := MW    62,
+           OUT4                     := DB40.DBD   24);
+_03d: NOP   0; 
+NETWORK
+TITLE =
+
+END_FUNCTION_BLOCK
+
